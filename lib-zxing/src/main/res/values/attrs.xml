@@ -11,6 +11,10 @@
         <attr name="inner_scan_bitmap" format="reference" />
         <attr name="inner_scan_speed" format="integer" />
         <attr name="inner_scan_iscircle" format="boolean" />
+        <!--扫描图是否绘制-->
+        <attr name="inner_scan_exist" format="boolean"/>
+        <!--扫描框外形是否绘制-->
+        <attr name="inner_scan_corner_exist" format="boolean"/>
     </declare-styleable>
 
 </resources>

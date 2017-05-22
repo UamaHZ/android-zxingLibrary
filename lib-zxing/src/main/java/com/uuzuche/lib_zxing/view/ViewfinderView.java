@@ -16,6 +16,8 @@
 
 package com.uuzuche.lib_zxing.view;
 
+import com.google.zxing.ResultPoint;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -24,15 +26,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
-import com.google.zxing.ResultPoint;
 import com.uuzuche.lib_zxing.DisplayUtil;
 import com.uuzuche.lib_zxing.R;
 import com.uuzuche.lib_zxing.camera.CameraManager;
@@ -55,7 +53,10 @@ public final class ViewfinderView extends View {
     private final int resultPointColor;
     private Collection<ResultPoint> possibleResultPoints;
     private Collection<ResultPoint> lastPossibleResultPoints;
-
+    //  扫描线是否存在绘制
+    private boolean innerScanIsExist;
+    //  扫描框是否存在绘制
+    private boolean innerCornerIsExist;
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -98,7 +99,10 @@ public final class ViewfinderView extends View {
         innercornerlength = (int) ta.getDimension(R.styleable.innerrect_inner_corner_length, 65);
         // 扫描框边角宽度
         innercornerwidth = (int) ta.getDimension(R.styleable.innerrect_inner_corner_width, 15);
-
+        //  扫描框是否存在绘制
+        innerCornerIsExist = ta.getBoolean(R.styleable.innerrect_inner_scan_corner_exist, true);
+        //  扫描线是否存在绘制
+        innerScanIsExist = ta.getBoolean(R.styleable.innerrect_inner_scan_exist, true);
         // 扫描bitmap
         Drawable drawable = ta.getDrawable(R.styleable.innerrect_inner_scan_bitmap);
         if (drawable != null) {
@@ -135,10 +139,10 @@ public final class ViewfinderView extends View {
             paint.setAlpha(OPAQUE);
             canvas.drawBitmap(resultBitmap, frame.left, frame.top, paint);
         } else {
-
-            drawFrameBounds(canvas, frame);
-
-            drawScanLight(canvas, frame);
+            if(innerCornerIsExist)
+                drawFrameBounds(canvas, frame);
+            if(innerScanIsExist)
+                drawScanLight(canvas, frame);
 
             Collection<ResultPoint> currentPossible = possibleResultPoints;
             Collection<ResultPoint> currentLast = lastPossibleResultPoints;

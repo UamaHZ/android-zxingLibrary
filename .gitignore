@@ -11,7 +11,6 @@
 # Java class files
 *.class
 .idea
-
 # Generated files
 bin/
 gen/
@@ -32,3 +31,5 @@ proguard/
 # iml files
 *.iml
 libs/
+images
+gradle

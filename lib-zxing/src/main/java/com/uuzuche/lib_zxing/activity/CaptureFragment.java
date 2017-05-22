@@ -1,5 +1,8 @@
 package com.uuzuche.lib_zxing.activity;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
+
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
@@ -17,8 +20,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
 import com.uuzuche.lib_zxing.R;
 import com.uuzuche.lib_zxing.camera.CameraManager;
 import com.uuzuche.lib_zxing.decoding.CaptureActivityHandler;
@@ -248,6 +249,30 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
 
     public void setAnalyzeCallback(CodeUtils.AnalyzeCallback analyzeCallback) {
         this.analyzeCallback = analyzeCallback;
+    }
+
+    /**
+     * 设置扫描框距离顶部距离
+     * @param marginTop
+     */
+    public void setScanMarginTop(int marginTop){
+        CameraManager.FRAME_MARGINTOP = marginTop;
+    }
+
+    /**
+     * 设置扫描框高度
+     * @param height
+     */
+    public void setScanHeight(int height){
+        CameraManager.FRAME_HEIGHT = height;
+    }
+
+    /**
+     * 设置扫描框宽度
+     * @param width
+     */
+    public void setScanWidth(int width){
+        CameraManager.FRAME_WIDTH = width;
     }
 
 }

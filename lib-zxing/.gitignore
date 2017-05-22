@@ -1,3 +1,6 @@
 /build
 !/build/outputs/mapping/release/*
 *.iml
+lib-zxing.iml
+src/androidTest
+src/test
