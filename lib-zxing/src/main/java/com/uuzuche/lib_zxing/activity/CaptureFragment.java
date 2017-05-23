@@ -139,7 +139,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             }
         } else {
             if (analyzeCallback != null) {
-                analyzeCallback.onAnalyzeSuccess(barcode, result.getText());
+                analyzeCallback.onAnalyzeSuccess(barcode, result);
             }
         }
     }

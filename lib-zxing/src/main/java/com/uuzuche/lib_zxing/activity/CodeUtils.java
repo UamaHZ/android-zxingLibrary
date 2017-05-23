@@ -1,13 +1,5 @@
 package com.uuzuche.lib_zxing.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.hardware.Camera;
-import android.os.Bundle;
-import android.text.TextUtils;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -19,12 +11,19 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.hardware.Camera;
+import android.os.Bundle;
+import android.text.TextUtils;
+
 import com.uuzuche.lib_zxing.camera.BitmapLuminanceSource;
 import com.uuzuche.lib_zxing.camera.CameraManager;
 import com.uuzuche.lib_zxing.decoding.DecodeFormatManager;
 
 import java.util.Hashtable;
-import java.util.Objects;
 import java.util.Vector;
 
 /**
@@ -93,7 +92,7 @@ public class CodeUtils {
 
         if (rawResult != null) {
             if (analyzeCallback != null) {
-                analyzeCallback.onAnalyzeSuccess(mBitmap, rawResult.getText());
+                analyzeCallback.onAnalyzeSuccess(mBitmap, rawResult);
             }
         } else {
             if (analyzeCallback != null) {
@@ -181,7 +180,7 @@ public class CodeUtils {
      */
     public interface AnalyzeCallback{
 
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result);
+        public void onAnalyzeSuccess(Bitmap mBitmap, Result result);
 
         public void onAnalyzeFailed();
     }

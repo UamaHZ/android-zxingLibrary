@@ -1,5 +1,7 @@
 package com.uuzuche.lib_zxing.activity;
 
+import com.google.zxing.Result;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -30,11 +32,11 @@ public class CaptureActivity extends AppCompatActivity {
      */
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+        public void onAnalyzeSuccess(Bitmap mBitmap, Result result) {
             Intent resultIntent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-            bundle.putString(CodeUtils.RESULT_STRING, result);
+            bundle.putString(CodeUtils.RESULT_STRING, result.getText());
             resultIntent.putExtras(bundle);
             CaptureActivity.this.setResult(RESULT_OK, resultIntent);
             CaptureActivity.this.finish();
