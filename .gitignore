@@ -33,3 +33,4 @@ proguard/
 libs/
 images
 gradle
+bintray.properties
