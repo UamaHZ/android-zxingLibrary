@@ -1,25 +1,6 @@
 # android-zxingLibrary
 
 
-**更新日志**
-
-- compile 1.3 2016/08/02 优化扫描API
-
-- compile 1.4 2016/08/03 修复扫描时二维码拉伸问题
-
-- compile 1.5 2016/08/05 更新控制闪光灯API
-
-- compile 1.6 2016/08/08 更新生成带logo二维码时logo不带边距可能存在的问题
-
-- compile 1.7 2016/08/09 修改默认扫描框的大小，适配不同分辨率手机，修改自定义扫描框属性类型
-
-- compile 1.8 2016/08/10 修复解析二维码图片时可能存在的OOM问题
-
-- compile 1.9 2016/09/07 Library库中删除Application，在demo库中的Application执行初始化操作
-
-- compile 2.0 2016/10/12 测试Demo中添加Android M权限处理，代码库添加自定义属性支持小圆点是否展示
-
-- compile 2.1 2016/11/22 修复扫描中的一些bug
 
 **使用说明**
 
@@ -45,7 +26,7 @@
 - 在module的build.gradle中执行compile操作
 
 ```
-compile 'cn.yipianfengye.android:zxing-library:2.1'
+compile 'com.uama:lib-zxing:1.0'
 ```
 
 - 在demo Application中执行初始化操作
@@ -218,11 +199,12 @@ if (requestCode == REQUEST_IMAGE) {
      */
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+        public void onAnalyzeSuccess(Bitmap mBitmap, Result result) {
+            String msg = result.getText();
             Intent resultIntent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-            bundle.putString(CodeUtils.RESULT_STRING, result);
+            bundle.putString(CodeUtils.RESULT_STRING, msg);
             resultIntent.putExtras(bundle);
             SecondActivity.this.setResult(RESULT_OK, resultIntent);
             SecondActivity.this.finish();
@@ -310,6 +292,8 @@ if (requestCode == REQUEST_IMAGE) {
         <attr name="inner_scan_bitmap" format="reference" /><!-- 控制扫描图 -->
         <attr name="inner_scan_speed" format="integer" /><!-- 控制扫描速度 -->
         <attr name="inner_scan_iscircle" format="boolean" /><!-- 控制小圆点是否展示 -->
+        <attr name="inner_scan_exist" format="boolean"/><!--扫描线是否绘制-->
+        <attr name="inner_scan_corner_exist" format="boolean"/><!--扫描框外形是否绘制-->
     </declare-styleable>
 ```
 
@@ -384,4 +368,4 @@ CodeUtils.isLightEnable(true);
  CodeUtils.isLightEnable(false);
 ```
 
-也可以参考我的博客：<a href="http://blog.csdn.net/qq_23547831/article/details/52037710">几行代码快速集成二维码扫描库</a>
+基于 <a href="https://github.com/yipianfengye/android-zxingLibrary">yipianfengye的扫描库进行调整</a>
