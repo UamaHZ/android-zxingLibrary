@@ -4,3 +4,5 @@
 lib-zxing.iml
 src/androidTest
 src/test
+project.properties
+bintrayUpload.gradle
