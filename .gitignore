@@ -34,3 +34,5 @@ libs/
 images
 gradle
 bintray.properties
+
+/.idea/libraries
